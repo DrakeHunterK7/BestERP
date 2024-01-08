@@ -1,0 +1,72 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ERP.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ERP.Views.AddNewUserView"
+             x:DataType="vm:AddNewUserViewModel"
+             x:CompileBindings="True">
+  <DockPanel Width="{Binding Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}">
+    <Grid ColumnDefinitions="1*, 3*" Margin="50">
+      <Border Grid.Column="0">
+        <DockPanel HorizontalAlignment="Stretch" Margin="20">
+          <TextBlock
+            DockPanel.Dock="Top"
+            Text="Add New User"
+            FontWeight="Bold"
+            Margin="0 0 0 0"
+            FontSize="20"
+            HorizontalAlignment="Center"/>
+
+          <Panel DockPanel.Dock="Top">
+            <Image Margin="25"
+                   Source="avares://ERP/Assets/user_avatar.png"/>
+          </Panel>
+        </DockPanel>
+      </Border>
+
+      <DockPanel Grid.Column="1"
+                 Margin="0 30 0 0">
+
+        <ScrollViewer DockPanel.Dock="Top">
+          <StackPanel HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal"  Margin="0 5 0 10">
+              <TextBlock VerticalAlignment="Center" Text="First Name: "/>
+              <TextBox Watermark="Enter first name" Text="{Binding newFirstName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 5 0 10">
+              <TextBlock VerticalAlignment="Center" Text="Last Name: "/>
+              <TextBox Watermark="Enter last name" Text="{Binding newLastName}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 5 0 10">
+              <TextBlock VerticalAlignment="Center" Text="Salary (PKR): "/>
+              <MaskedTextBox Mask="\$999000.00" Text="{Binding newSalary}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 5 0 10">
+              <TextBlock VerticalAlignment="Center" Text="Department: "/>
+              <ComboBox SelectedIndex="0" MaxDropDownHeight="100">
+                <ComboBoxItem>IT</ComboBoxItem>
+                <ComboBoxItem>Admin</ComboBoxItem>
+                <ComboBoxItem>Sales</ComboBoxItem>
+              </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 5 0 10">
+              <TextBlock VerticalAlignment="Top" Text="Starting Date: "/>
+              <StackPanel Margin="10 0 0 0">
+                <Calendar x:Name="calendar" SelectionMode="SingleDate"/>
+                <TextBlock Margin="0"
+                           Text="{Binding #calendar.SelectedDate}"/>
+
+                <Button DockPanel.Dock="Top" Margin="0 5 0 0" HorizontalAlignment="Center"
+            Command="{Binding AddUserCommand}">Create</Button>
+              </StackPanel>
+            </StackPanel>
+          </StackPanel>
+        </ScrollViewer>
+
+      </DockPanel>
+
+    </Grid>
+  </DockPanel>
+</UserControl>

@@ -1,0 +1,21 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ERP.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:views="clr-namespace:ERP.Views"
+             x:Class="ERP.Views.MainView"
+             x:DataType="vm:MainViewModel"
+             x:CompileBindings="True">
+  <TabControl Margin="25">
+    <TabItem Header="Home">
+      <TextBlock Margin="5">More Content Here Soon</TextBlock>
+    </TabItem>
+    <TabItem Header="Accounts" DataContext="{Binding AMViewModel}">
+      <views:AccountsModuleView/>
+    </TabItem>
+    <TabItem Header="Inventory">
+    </TabItem>
+  </TabControl>
+</UserControl>
