@@ -27,7 +27,19 @@ namespace ERP.ViewModels
 
         public void AddNewUser()
         {
-            ContentViewModel = new AddNewUserViewModel();
+            ContentViewModel = new AddNewUserViewModel(this);
+        }
+
+        public void OpenPage(ViewModelBase newViewModel)
+        {
+            ContentViewModel = newViewModel;
+        }
+
+        public void OpenMainView(int SelectedIndex)
+        {
+            MainViewModel mv = new();
+            mv.SelectedTab = SelectedIndex;
+            ContentViewModel = mv;
         }
     }
 }

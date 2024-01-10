@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using DynamicData;
 
 namespace ERP.Views
 {
@@ -7,6 +8,12 @@ namespace ERP.Views
         public AddNewUserView()
         {
             InitializeComponent();
+            LoadComboBox();
+        }
+
+        public void LoadComboBox()
+        {
+            DepartmentDropdown.SelectedItem = DepartmentDropdown.Items[0];
         }
     }
 }

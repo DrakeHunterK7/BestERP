@@ -13,9 +13,12 @@ namespace ERP.ViewModels
     {
         private AccountsModuleViewModel amViewModel;
 
+        public int SelectedTab { get; set; }
+
         public MainViewModel() {
 
             amViewModel = new AccountsModuleViewModel();
+            SelectedTab = 0;
         }
 
         public AccountsModuleViewModel AMViewModel

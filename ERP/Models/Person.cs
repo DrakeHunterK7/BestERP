@@ -20,6 +20,16 @@ namespace ERP.Models
 
         public DateTime StartingDate { get; set; }
 
+        public Person()
+        {
+            FirstName = "";
+            LastName = "";
+            Id = 0;
+            Department = "IT";
+            Salary = 100.00m;
+            StartingDate = DateTime.Now;    
+        }
+
         public Person(string firstName, string lastName, int id, string department, decimal salary, DateTime startingDate)
         {
             FirstName = firstName;

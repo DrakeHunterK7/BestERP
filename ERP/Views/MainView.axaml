@@ -8,7 +8,7 @@
              x:Class="ERP.Views.MainView"
              x:DataType="vm:MainViewModel"
              x:CompileBindings="True">
-  <TabControl Margin="25">
+  <TabControl Margin="25" SelectedIndex="{Binding SelectedTab}">
     <TabItem Header="Home">
       <TextBlock Margin="5">More Content Here Soon</TextBlock>
     </TabItem>
