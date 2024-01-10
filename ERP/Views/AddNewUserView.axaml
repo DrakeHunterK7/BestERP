@@ -7,66 +7,71 @@
              x:Class="ERP.Views.AddNewUserView"
              x:DataType="vm:AddNewUserViewModel"
              x:CompileBindings="True">
-  <DockPanel Width="{Binding Width, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}">
-    <Grid ColumnDefinitions="1*, 3*" Margin="50">
-      <Border Grid.Column="0">
-        <DockPanel HorizontalAlignment="Stretch" Margin="20">
-          <TextBlock
-            DockPanel.Dock="Top"
-            Text="Add New User"
-            FontWeight="Bold"
-            Margin="0 0 0 0"
-            FontSize="20"
-            HorizontalAlignment="Center"/>
-
-          <Panel DockPanel.Dock="Top">
-            <Image Margin="25"
-                   Source="avares://ERP/Assets/user_avatar.png"/>
-          </Panel>
-        </DockPanel>
-      </Border>
-
-      <DockPanel Grid.Column="1"
-                 Margin="0 30 0 0">
-
-        <ScrollViewer DockPanel.Dock="Top">
-          <StackPanel HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal"  Margin="0 5 0 10">
-              <TextBlock VerticalAlignment="Center" Text="First Name: "/>
-              <TextBox Watermark="Enter first name" Text="{Binding newFirstName}"/>
+      <DockPanel>
+        <Border Margin="0" Padding="10">
+          <DockPanel Margin="15">
+            <Button DockPanel.Dock="Top" VerticalAlignment="Top" x:CompileBindings="False"
+                      Command="{Binding $parent[Window].DataContext.LogIn}">Go Back</Button>
+            <StackPanel DockPanel.Dock="Top" VerticalAlignment="Center">
+              <TextBlock DockPanel.Dock="Top" Margin="5" FontSize="20" HorizontalAlignment="Center" >
+                Add New User
+              </TextBlock>
+              <TextBlock Margin="5" HorizontalAlignment="Center">
+                You are creating a new employee record
+              </TextBlock>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 5 0 10">
-              <TextBlock VerticalAlignment="Center" Text="Last Name: "/>
-              <TextBox Watermark="Enter last name" Text="{Binding newLastName}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 5 0 10">
-              <TextBlock VerticalAlignment="Center" Text="Salary (PKR): "/>
-              <MaskedTextBox Mask="\$999000.00" Text="{Binding newSalary}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 5 0 10">
-              <TextBlock VerticalAlignment="Center" Text="Department: "/>
-              <ComboBox SelectedIndex="0" MaxDropDownHeight="100">
+          </DockPanel>
+        </Border>
+    
+        <ScrollViewer Margin="0 100 0 0">
+          <StackPanel Margin="20">
+          
+            <DockPanel Margin="0 0 0 20">
+              <TextBlock Margin="0 0 10 0" FontSize="20" FontWeight="Medium" VerticalAlignment="Center" DockPanel.Dock="Top">First Name </TextBlock>
+              <TextBlock Margin="5 0 10 10" FontSize="15" FontWeight="Light" VerticalAlignment="Center" DockPanel.Dock="Top">Legal first name as per identity document </TextBlock>
+              <TextBox Watermark="Enter first name" DockPanel.Dock="Left" Text="{Binding newUser.FirstName}"> </TextBox>
+            </DockPanel>
+
+            <DockPanel Margin="0 0 0 20">
+              <TextBlock Margin="0 0 10 0" FontSize="20" FontWeight="Medium" VerticalAlignment="Center" DockPanel.Dock="Top">Last Name </TextBlock>
+              <TextBlock Margin="5 0 10 10" FontSize="15" FontWeight="Light" VerticalAlignment="Center" DockPanel.Dock="Top">Legal last name or surname as per identity document </TextBlock>
+              <TextBox Watermark="Enter last name or surname" DockPanel.Dock="Left" Text="{Binding newUser.LastName}"> </TextBox>
+            </DockPanel>
+
+            <DockPanel Margin="0 0 0 50">
+              <TextBlock Margin="0 0 10 0" FontSize="20" FontWeight="Medium" VerticalAlignment="Center" DockPanel.Dock="Top">Department </TextBlock>
+              <TextBlock Margin="5 0 10 10" FontSize="15" FontWeight="Light" VerticalAlignment="Center" DockPanel.Dock="Top">Which department will this employee be working in? </TextBlock>
+              <ComboBox Name="DepartmentDropdown" MaxDropDownHeight="100" SelectedItem="{Binding SelectedDepartment}" SelectedIndex="0">
                 <ComboBoxItem>IT</ComboBoxItem>
                 <ComboBoxItem>Admin</ComboBoxItem>
                 <ComboBoxItem>Sales</ComboBoxItem>
               </ComboBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 5 0 10">
-              <TextBlock VerticalAlignment="Top" Text="Starting Date: "/>
-              <StackPanel Margin="10 0 0 0">
-                <Calendar x:Name="calendar" SelectionMode="SingleDate"/>
-                <TextBlock Margin="0"
-                           Text="{Binding #calendar.SelectedDate}"/>
+            </DockPanel>
 
-                <Button DockPanel.Dock="Top" Margin="0 5 0 0" HorizontalAlignment="Center"
-            Command="{Binding AddUserCommand}">Create</Button>
-              </StackPanel>
-            </StackPanel>
+            <DockPanel Margin="0 0 0 20">
+              <TextBlock Margin="0 0 10 0" FontSize="20" FontWeight="Medium" VerticalAlignment="Center" DockPanel.Dock="Top">Salary </TextBlock>
+              <TextBlock Margin="5 0 10 10" FontSize="15" FontWeight="Light" VerticalAlignment="Center" DockPanel.Dock="Top">Monthly salary of this employee in Pakistani Rupees (PKR) </TextBlock>
+              <NumericUpDown Value="{Binding newUser.Salary}"/>
+            </DockPanel>
+
+            <DockPanel Margin="0 0 0 20">
+              <TextBlock Margin="0 0 10 0" FontSize="20" FontWeight="Medium" VerticalAlignment="Center" DockPanel.Dock="Top">Starting Date </TextBlock>
+              <TextBlock Margin="5 0 10 10" FontSize="15" FontWeight="Light" VerticalAlignment="Center" DockPanel.Dock="Top">The exact date when this employee will begin working </TextBlock>
+              <CalendarDatePicker Name="StartingDatePicker" SelectedDate="{Binding newUser.StartingDate}" DockPanel.Dock="Top"/>
+              <DockPanel DockPanel.Dock="Top" Margin="0 10 0 0">
+                <TextBlock DockPanel.Dock="Left">Selected Date: </TextBlock>
+                <TextBlock DockPanel.Dock="Left" Margin="5 0 0 0" Text="{Binding #StartingDatePicker.SelectedDate}"/>
+              </DockPanel>
+            </DockPanel>
+
+            <DockPanel Margin="0 20 0 20">
+              <Button x:CompileBindings="False"
+                      Command="{Binding AddUserCommand}">Create User</Button>
+            </DockPanel>
+          
           </StackPanel>
         </ScrollViewer>
-
+    
       </DockPanel>
 
-    </Grid>
-  </DockPanel>
 </UserControl>

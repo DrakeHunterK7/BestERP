@@ -1,7 +1,9 @@
-﻿using ERP.Models;
+﻿using Avalonia.Controls;
+using ERP.Models;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,28 +14,32 @@ namespace ERP.ViewModels
 {
     public class AddNewUserViewModel : ViewModelBase
     {
-        public string newFirstName { get; set; }
-        public string newLastName { get; set; }
-        public decimal newSalary { get; set; }
-        public int newID { get; set; }
-        public DateTime createdDate { get; set; }
+        public Person newUser { get; set; }
 
-        public string newDepartment { get; set; }
+        public MainWindowViewModel MWViewModel { get; set; }
 
-        public AddNewUserViewModel() {
+        public ComboBoxItem SelectedDepartment { get; set; }
 
-            newFirstName = "";
-            newLastName = "";
-            newSalary = 100.00m;
-            newID = 0;
-            createdDate = System.DateTime.Today;
-            newDepartment = "IT";
+        public AddNewUserViewModel(MainWindowViewModel mw) {
+
+            SelectedDepartment = new ComboBoxItem
+            {
+                Content = "IT"
+            };
+
+            MWViewModel = mw;
+
+            newUser = new Person();
 
             AddUserCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                Random rand = new Random();
-                await SaveToDiskAsync(new Person(newFirstName, newLastName, rand.Next(99999999, int.MaxValue), newDepartment, newSalary, createdDate));
 
+                newUser.Department = SelectedDepartment.Content.ToString();
+                
+                Random rand = new();
+                await SaveToDiskAsync(new Person(newUser.FirstName, newUser.LastName, rand.Next(99999999, int.MaxValue), newUser.Department, newUser.Salary, newUser.StartingDate));
+
+                MWViewModel.OpenMainView(0);
 
             });
         }
